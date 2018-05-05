@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>Melp</title>
+
+		<!-- Styles and fonts -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    <link href="vendor/dataTables/datatables.min.css"rel="stylesheet" type="text/css">
+	    <link href="css/style_show_all.css" rel="stylesheet">
+	    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+	</head>
+
+	<body> 
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		  <a class="navbar-brand" href="#">Melp</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="show_all.html">All Restsaurants</a>
+		      </li>
+		      
+		      <li class="nav-item">
+		        <a class="nav-link" href="map.html">Closest Restaurants</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+
+		<div class="container-fluid">
+
+			<div class="row">
+
+				<div class="col-lg-12">
+					<h1>All the restaurants</h1>
+						
+					<table id="all" class="table-dark display">
+				        <thead>
+				            <tr>
+				                <th rowspan="4">ID</th>
+				                <th rowspan="4">Raiting</th>
+				                <th rowspan="4">Name</th>
+				                <th colspan="4">Contact</th>
+				                
+				            </tr>
+
+				            <tr>
+				                <th rowspan="3">Site</th>
+				                <th rowspan="3">Email</th>
+				                <th rowspan="3">Phone</th>
+				                <th colspan="4">Adress</th>
+				                
+				            </tr>
+
+				            <tr>
+				                <th rowspan="2">Street</th>
+				                <th rowspan="2">City</th>
+				                <th rowspan="2">State</th>
+				                <th colspan="2">Location</th>
+				                
+				            </tr>
+
+				            <tr>
+				                <th>Altitude</th>
+				                <th>Longitude</th>                
+				            </tr>
+
+				        </thead>
+				        <tbody>
+                            
+                        </tbody>
+                        
+                    </table>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="vendor/dataTables/datatables.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                $.getJSON('https://s3-us-west-2.amazonaws.com/lgoveabucket/data_melp.json', function(data) {
+
+                    var table = $('#all');
+
+                    $.each(data, function(){
+                        table.append(
+                            $('<tr></tr>').append(
+                                $('<td></td>').text(this.id),
+                                $('<td></td>').text(this.rating),
+                                $('<td></td>').text(this.name),
+                                $('<td></td>').text(this.contact.site),
+                                $('<td></td>').text(this.contact.email),
+                                $('<td></td>').text(this.contact.phone),
+                                $('<td></td>').text(this.address.street),
+                                $('<td></td>').text(this.address.city),
+                                $('<td></td>').text(this.address.state),
+                                $('<td></td>').text(this.address.location.lat),
+                                $('<td></td>').text(this.address.location.lng)
+                            )
+                        );
+                    });
+
+					$('#all').DataTable({
+
+searching:false,
+scrollY: 400,
+fixedHeader: {
+	
+	header: false
+
+},
+
+scrollCollaps: true,
+
+});
+                
+                });
+
+            });
+                
+		</script>
+		
+	</body>
+
+</html>
