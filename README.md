@@ -1,0 +1,2 @@
+# intelimetrica
+Examen práctico 
