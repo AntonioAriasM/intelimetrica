@@ -21,8 +21,11 @@ h1{
 
 }
 
-#mapid{ 
+#map{ 
     
-    height: 180px;
+	height: 40em;
+	width: 100em;
+	margin: auto;
+
 
 }
