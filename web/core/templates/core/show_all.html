@@ -1,0 +1,82 @@
+{% extends 'core/template.html'%}
+
+{% block title %} All restaurants {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+        <div class="row fila">
+
+            <div class="col-lg-12" id="columna">
+                <h1>All restaurants</h1>
+				<div class="over">
+
+					<table id="all" class="table-dark display">
+				        <thead>
+				            <tr>
+				                <th rowspan="4">ID</th>
+				                <th rowspan="4">Raiting</th>
+				                <th rowspan="4">Name</th>
+				                <th colspan="4">Contact</th>
+				                
+				            </tr>
+
+				            <tr>
+				                <th rowspan="3">Site</th>
+				                <th rowspan="3">Email</th>
+				                <th rowspan="3">Phone</th>
+				                <th colspan="4">Adress</th>
+				                
+				            </tr>
+
+				            <tr>
+				                <th rowspan="2">Street</th>
+				                <th rowspan="2">City</th>
+				                <th rowspan="2">State</th>
+				                <th colspan="2">Location</th>
+				                
+				            </tr>
+
+				            <tr>
+				                <th>Altitude</th>
+				                <th>Longitude</th>                
+				            </tr>
+
+				        </thead>
+				        <tbody>
+
+                            {% for element in list %}       
+                                <tr>
+                                    <td>{{element.id}}</td>
+                                    <td>{{element.rating}}</td>
+                                    <td>{{element.name}}</tb>
+                                    
+                                    {% for key,value in element.contact.items%}    
+                                        <td>{{value}}</tb>
+                                    {%endfor%}
+    
+                                    <td>{{element.address.street}}</tb>
+                                    <td>{{element.address.city}}</tb>
+                                    <td>{{element.address.state}}</tb>
+                                    <td>{{element.address.location.lat}}</tb>
+                                    <td>{{element.address.location.lng}}</tb>
+                                </tr>
+                                    
+                                
+                                   
+                            {% endfor %}
+                        
+				        </tbody>
+              
+    		</table>
+
+				</div>
+				
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
