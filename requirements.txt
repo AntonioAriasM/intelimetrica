@@ -1,0 +1,6 @@
+Pillow 
+django 
+django-ckeditor
+django-leaflet
+requests
+json
